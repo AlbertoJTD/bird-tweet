@@ -6,11 +6,48 @@
 
     <header>
       <%= render "shared/flash_notice" %>
-      <%= render "shared/navbar" %>
     </header>
 
-    <main class="flex-grow">
-      <%= content_for?(:content) ? yield(:content) : yield %>
+    <main class="flex-grow container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-12 h-screen pr-6">
+        <div class="lg:col-span-2 pt-6 pr-6">
+          <%= link_to root_path, class: 'link text-xl tracking-tight font-black' do %>
+            <span class="text-sky-500">Bird tweet</span>
+          <% end %>
+          <ul class="mt-6">
+            <li>
+              <%= link_to root_path, class: 'rounded-full px-4 -ml-4 inline-flex items-center py-3 hover:bg-neutral-50 w-full text-lg transition ease-in-out duration-500' do %>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current w-6 h-6 mr-4">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                </svg>
+                <span>Home</span>
+              <% end %>
+            </li>
+            <% if user_signed_in? %>
+               <li>
+                  <%= link_to profile_path(current_user), class: 'rounded-full px-4 -ml-4 inline-flex items-center py-3 hover:bg-neutral-50 w-full text-lg transition ease-in-out duration-500' do %>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="fill-current w-6 h-6 mr-4">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+                    </svg>
+                    <span>Profile</span>
+                  <% end %>
+                </li>
+            <% end %>
+          </ul>
+        </div>
+        <div class="lg:col-span-6 border-x">
+          <%= content_for?(:content) ? yield(:content) : yield %>
+        </div>
+        <div class="lg:col-span-4 pl-6 pt-6">
+          <div class="bg-gray-100 w-full min-h-[150px] rounded-lg p-6 mb-6">Sidebar stuff</div>
+          <% if user_signed_in? %>
+            <p class="mb-4">Signed in as <%= current_user.name %></p>
+            <%= button_to 'Sign out', destroy_user_session_path, method: :delete, class: button_class(theme: 'primary'), data: {turbo: false} %>
+          <% else %>
+            <%= link_to 'Sign in', new_user_session_path, class: button_class(theme: 'primary') %>
+          <% end %>
+        </div>
+      </div>
     </main>
   </body>
 </html>
