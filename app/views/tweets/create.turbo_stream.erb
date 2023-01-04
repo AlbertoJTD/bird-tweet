@@ -1,3 +1,7 @@
-<%= turbo_stream.prepend "tweets" do %>
-  <%= render "tweet", tweet: @tweet %>
+<%= turbo_stream.prepend 'tweets' do %>
+  <%= render 'tweet', tweet: @tweet %>
+<% end %>
+
+<%= turbo_stream.update 'new_tweet' do %>
+  <%= render 'form', tweet: Tweet.new %>
 <% end %>

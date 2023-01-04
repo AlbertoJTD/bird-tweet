@@ -1,6 +1,6 @@
 <%= Time.zone.now %>
-<div class="mb-8">
-  <%= render 'form' %>
+<div id="new_tweet" class="mb-8">
+  <%= render partial: 'form', locals: { tweet: @tweet} %>
 </div>
 
 <%= turbo_frame_tag "tweets" do %>
