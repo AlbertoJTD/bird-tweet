@@ -1,4 +1,76 @@
-<div class="p-6">
-  <div><%= tweet.body %></div>
-  <%= tweet.user.name %>
+<div class="px-6 py-3">
+  <div class="flex space-x-3 items-start pb-3">
+    <%= profile_image(tweet.user) %>
+  </div>
+  <div class="flex-1">
+    <p class="font-bold">
+      <%= link_to tweet.user.name, profile_path(tweet.user), class: 'hover:underline', data: { turbo: false } %>
+    </p>
+    <div class="prose prose-lg"><%= tweet.body %></div>
+
+    <ul class="-ml-3 flex space-x-14 items-start justify-start list-none">
+      <li>
+        <%= link_to tweet, class: 'text-gray-500 space-x-2 group flex items-center justify-center', data: { turbo: false } do %>
+          <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-sky-50">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:text-sky-500">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 20.25c4.97 0 9-3.694 9-8.25s-4.03-8.25-9-8.25S3 7.444 3 12c0 2.104.859 4.023 2.273 5.48.432.447.74 1.04.586 1.641a4.483 4.483 0 01-.923 1.785A5.969 5.969 0 006 21c1.282 0 2.47-.402 3.445-1.087.81.22 1.668.337 2.555.337z" />
+            </svg>
+          </div>
+          <span class="group-hover:text-sky-500 text-gray-500">3</span>
+          <%# <%= turbo_frame_tag "#{dom_id(tweet)}_comments_count" do %>
+            <%# render 'tweets/comments_count', tweet: tweet %>
+          <%# end %>
+        <% end %>
+
+        <% if user_signed_in? && tweet.user_id != current_user.id %>
+          <li>
+            <a href="#" class="text-gray-500 space-x-2 group flex items-center justify-center">
+              <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-green-50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:text-green-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 12c0-1.232-.046-2.453-.138-3.662a4.006 4.006 0 00-3.7-3.7 48.678 48.678 0 00-7.324 0 4.006 4.006 0 00-3.7 3.7c-.017.22-.032.441-.046.662M19.5 12l3-3m-3 3l-3-3m-12 3c0 1.232.046 2.453.138 3.662a4.006 4.006 0 003.7 3.7 48.656 48.656 0 007.324 0 4.006 4.006 0 003.7-3.7c.017-.22.032-.441.046-.662M4.5 12l3 3m-3-3l-3 3" />
+                </svg>
+              </div>
+              <span class="group-hover:text-green-500 text-gray-500">3</span>
+            </a>
+            <%# button_to retweet_tweet_path(tweet), method: :delete, class: 'text-gray-500 space-x-2 group flex items-center justify-center' do %>
+              <%# <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-green-50">
+              </div> %>
+            <%# end %>
+          </li>
+        <% end %>
+
+        <li>
+          <a href="#" class="text-gray-500 space-x-2 group flex items-center justify-center">
+            <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-rose-50">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:text-rose-500">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+              </svg>
+            </div>
+            <span class="group-hover:text-rose-500 text-gray-500">3</span>
+          </a>
+          <%#= content_tag :div, class: "#{dom_id(tweet)}_likes" do %>
+            <%#= render 'likes/likes', likeable: tweet %>
+          <%# end %>
+        </li>
+
+        <% if user_signed_in? && current_user == tweet.user %>
+          <li>
+            <%#= button_to tweet_path(tweet), method: :delete, form: { data: { turbo_confirm: 'Are you sure?' } }, class: 'text-gray-500 space-x-2 group flex items-center justify-center' do %>
+              <%# <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-50">
+              </div> %>
+            <%# end %>
+
+            <a href="#" class='text-gray-500 space-x-2 group flex items-center justify-center'>
+              <div class="flex items-center justify-center w-10 h-10 rounded-full hover:bg-gray-50">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 group-hover:text-rose-500 text-gray-500">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
+                </svg>
+              </div>
+            </a>
+          </li>
+        <% end %>
+
+      </li>
+    </ul>
+  </div>
 </div>
