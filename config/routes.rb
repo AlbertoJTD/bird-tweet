@@ -7,8 +7,9 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  devise_for :users
   resources :tweets, except: [:edit, :update]
-  root to: 'tweets#index'
+  resources :profiles
 
+  devise_for :users
+  root to: 'tweets#index'
 end
