@@ -5,3 +5,7 @@
 <%= turbo_stream.update 'new_tweet' do %>
   <%= render 'form', tweet: Tweet.new %>
 <% end %>
+
+<%= turbo_stream.remove 'empty_state' do %>
+  <%= render 'tweets/empty' %>
+<% end %>
