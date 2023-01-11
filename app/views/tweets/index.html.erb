@@ -1,13 +1,11 @@
-<div id="new_tweet" class="mb-8">
+<div id="new_tweet_form" class="mb-8">
   <%= render partial: 'form', locals: { tweet: @tweet} %>
+</div>
+
+<div id="empty">
+  <%= render 'empty' %>
 </div>
 
 <%= turbo_frame_tag "tweets", class: 'divide-y'  do %>
   <%= render @tweets %>
-<% end %>
-
-<%= turbo_frame_tag 'empty_state' do %>
-  <% if @tweets.none? %>
-    <%= render 'empty' %>
-  <% end %>
 <% end %>

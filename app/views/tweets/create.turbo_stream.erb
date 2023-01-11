@@ -2,10 +2,10 @@
   <%= render 'tweet', tweet: @tweet %>
 <% end %>
 
-<%= turbo_stream.update 'new_tweet' do %>
+<%= turbo_stream.update 'new_tweet_form' do %>
   <%= render 'form', tweet: Tweet.new %>
 <% end %>
 
-<%= turbo_stream.remove 'empty_state' do %>
+<%= turbo_stream.remove Tweet.new do %>
   <%= render 'tweets/empty' %>
 <% end %>

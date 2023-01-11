@@ -1,3 +1,7 @@
-<div class="p-6">
-  Nothing to see here ✨
-</div>
+<% if Tweet.all.none? %>
+  <%= turbo_frame_tag Tweet.new do %>
+    <div class="p-6">
+      Nothing to see here ✨
+    </div>
+  <% end %>
+<% end %>

@@ -1,7 +1,5 @@
 <%= turbo_stream.remove @tweet %>
 
-<% unless Tweet.all.any? %>
-  <%= turbo_stream.update 'empty_state' do %>
-    <%= render 'tweets/empty' %>
-  <% end %>
+<%= turbo_stream.update "empty" do %>
+  <%= render "tweets/empty" %>
 <% end %>
