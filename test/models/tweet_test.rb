@@ -6,6 +6,7 @@
 #  body       :text
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  tweet_id   :integer
 #  user_id    :bigint           not null
 #
 # Indexes
