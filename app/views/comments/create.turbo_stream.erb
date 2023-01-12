@@ -1,0 +1,3 @@
+<%= turbo_stream.append "#{dom_id(@tweet)}_comments" do %>
+  <%= render 'comment', comment: @comment %>
+<% end %>
