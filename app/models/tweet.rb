@@ -18,6 +18,7 @@
 #  fk_rails_...  (user_id => users.id)
 #
 class Tweet < ApplicationRecord
+  include Likeable
   belongs_to :user
   belongs_to :tweet, optional: true
   has_many :comments
