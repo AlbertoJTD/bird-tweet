@@ -1,24 +1,37 @@
-# README
+# Bird Tweet 🐦
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a clon of Twitter
 
-Things you may want to cover:
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/89556233/233819375-17a82675-24bc-4d0a-b4f8-3b87fd73f44c.png" width="1000" height="550" style="text-align:center;">
+</p>
 
-* Ruby version
 
-* System dependencies
+## Minimum requirements
+- Ruby 3.2.1
+- Rails 7.0.4
 
-* Configuration
+# Libraries
+- [Stimulus JS](https://stimulus.hotwired.dev)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Turbo](https://turbo.hotwired.dev/)
+- [PosgreSQL](https://www.postgresql.org/)
 
-* Database creation
+## Configuration
+1. Create the data base and run the migrations:
+```ruby
+rails db:create db:migrate
+```
 
-* Database initialization
+2. Install the gems
+```ruby
+bundle install
+```
 
-* How to run the test suite
+## Start the server
+After pre-configuring the application, use one of the following commands to run the server:
+```ruby
+rails s
+./bin/dev
+```
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
